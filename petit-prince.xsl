@@ -16,9 +16,7 @@
     <xsl:apply-templates select = "//author"/>
     <xsl:apply-templates select = "//styling_information"/>
     <xsl:apply-templates select = "//image"/>
-    <p>
     <xsl:apply-templates select = "//paragraph"/>
-    </p>
 </body>
 </html>
 </xsl:template>
@@ -48,9 +46,10 @@
             </xsl:attribute>
         </img>
     </div>
-</xsl:template>
+</xsl:template> 
 
-<xsl:template match="paragraph">
+<!--<xsl:template match="paragraph">
+    <p>
     <xsl:for-each select="phrase">
         <xsl:if test="./@language = 'francais'">
             <xsl:if test="./preceding-sibling::phrase[1]/@language = 'hongrois'">
@@ -67,8 +66,48 @@
             </span>
         </xsl:if>
     </xsl:for-each>
-    
+    </p>
 </xsl:template>
+-->
+
+<xsl:template match="paragraph">
+    <p>
+     <!-- si on a de la narration-->
+    <xsl:if test="@type='narration'">
+        <xsl:for-each select="phrase">
+            <xsl:if test="./@language = 'francais'">
+                <xsl:if test="./preceding-sibling::phrase[1]/@language = 'hongrois'">
+                    <br/>
+                </xsl:if>
+                <xsl:value-of select="text()"/>
+            </xsl:if>
+
+            <xsl:if test="./@language = 'hongrois'">
+                <xsl:if test="./preceding-sibling::phrase[1]/@language = 'francais'">
+                    <br/>
+                </xsl:if>
+                <span style="color: brown; font-style: italic;">
+                    <xsl:value-of select="text()"/>
+                </span>
+            </xsl:if>
+        </xsl:for-each>
+    </xsl:if>
+
+    <!-- si on a un dialogue -->
+    <xsl:if test="@type='dialogue'">
+        <xsl:for-each select="phrase">
+            <table border="3" width="80%" align="center">
+                <tr>
+                    <td>
+                        <xsl:value-of select="text()"/>
+                    </td>
+                </tr>
+            </table>
+        </xsl:for-each>
+    </xsl:if>
+    </p>
+</xsl:template>
+
 
 
 </xsl:stylesheet>
