@@ -11,11 +11,12 @@
     <styling_information>
       <styling_description>Traitement d'un texte franco/hongrois avec XPath / XSLT / XQuery</styling_description>
       <styled_by>
-        <style_manager>Moi</style_manager>
-        <style_manager>Mon binome</style_manager>
+        <style_manager>Isaline FOISSEY</style_manager>
+        <style_manager>Florian Le Vasseur</style_manager>
+        <style_manager>Romane Gouineaud</style_manager>
         <NoBinome>B3100</NoBinome>
       </styled_by>
-      <email>text</email>
+      <email>isaline.foissey@insa-lyon.fr</email>
       <date>01/05/201</date>
     </styling_information>
     <link language="francais">http://wikilivres.info/wiki/Le_Petit_Prince</link>
