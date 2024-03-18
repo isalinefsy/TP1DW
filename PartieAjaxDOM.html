@@ -10,11 +10,14 @@
       <input name="button" id="idButton1" onclick="changeColor('blue','white');" value="Change Background Color" type="button">
       <br>
       Reset the background color : <br>
-      <input name="button2" id="idButton2" onclick="changeColor('white','white');" value="2. AJAX with Employees.xml" type="button"> <br>
+      <input name="button2" id="idButton2" onclick="changeColor('white','white');" value="Reset BackGround Color" type="button"> <br>
       <br>
-    <p>Displays the official name and the capital of the country of code : <br>
-      <input name = "input_country" id = "id_code_country" value = "Select a country code" type="text"> <input name="button3" id="idButton3"  onclick="DisplaySelectedCountry('countriesTP.xml','cherchepays.xsl','Pays',document.getElementById('id_code_country').value);" value="Select" type="button" >
-
+      <p>Displays the official name and the capital of the country of code : <br>
+        <input name="text" type="text" id="id_code_country" value="FR" list="available_codes"/>
+              <datalist id = "available_codes">
+              </datalist>
+        <input name="button3" id="idButton3"  onclick="But3_DisplaySelectedCountry('countriesTP.xml','cherchepays.xsl','Pays',document.getElementById('id_code_country').value);" value="Select" type="button" >
+      </p>
     
 <p id="id_display_selected_country"></p>
 <br>
