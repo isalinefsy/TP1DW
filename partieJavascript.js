@@ -78,46 +78,91 @@ function DisplaySelectedCountry(xmlDocumentUrl, xslDocumentUrl, ElementARecupere
     var newXmlDocument = xsltProcessor.transformToDocument(xmlDocument);
 
     // Recherche du parent (dont l'id est "here") de l'�l�ment � remplacer dans le document HTML courant
-    var elementHtmlParent = window.document.getElementById("id_display_country");
+    var elementHtmlParent = window.document.getElementById("id_display_selected_country");
     
 	// ins�rer l'�lement transform� dans la page html
     elementHtmlParent.innerHTML=newXmlDocument.getElementsByTagName(ElementARecuperer)[0].innerHTML;
 	
 }
 
-
-function LoadDrawing(){
-    
-}
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function Bouton2_ajaxEmployees(xmlDocumentUrl) {
+function But4_LoadDrawing(xmlDocumentUrl) {
 
 
     var xmlDocument = chargerHttpXML(xmlDocumentUrl);
-
-    //extraction des noms � partir du document XML (avec une feuille de style ou en javascript)
-    var lesNoms = xmlDocument.getElementsByTagName("LastName");
-
-    // Parcours de la liste des noms avec une boucle for et 
-    // construction d'une chaine de charact�res contenant les noms s�par�s par des espaces 
-    // Pour avoir la longueur d'une liste : attribut 'length'
-    // Acc�s au texte d'un noeud "LastName" : NOM_NOEUD.firstChild.nodeValue
-    var chaineDesNoms = "";
-    for (i = 0; i < lesNoms.length; i++) {
-        if (i > 0) {
-            chaineDesNoms = chaineDesNoms + ", ";
-        }
-        chaineDesNoms = chaineDesNoms + lesNoms[i].firstChild.nodeValue + " ";
-    }
-
-
-    // Appel (ou recopie) de la fonction setName(...) ou bien autre fa�on de modifier le texte de l'�l�ment "span"
-    setName(chaineDesNoms);
-
-
+    
+    var serializer = new XMLSerializer();
+    var str = serializer.serializeToString(xmlDocument);
+    
+    // Recherche du parent (dont l'id est "here") de l'�l�ment � remplacer dans le document HTML courant
+    var elementHtmlParent = window.document.getElementById("id_display_drawing");
+    
+	// ins�rer l'�lement transform� dans la page html
+    elementHtmlParent.innerHTML = str;
 
 }
+
+function DisplayTitle(){
+    document.getElementById('id_display_title').innerHTML=this.getAttribute("title");
+}
+
+function But5_MakeClickable(){
+    var cercle = document.getElementsByTagName('circle')[0];
+    cercle.addEventListener("click", DisplayTitle);
+    var rect = document.getElementsByTagName('rect')[0];
+    rect.addEventListener("click", DisplayTitle);
+    var path = document.getElementsByTagName('path')[0];
+    path.addEventListener("click", DisplayTitle);
+}
+
+function But6_LoadMap(xmlDocumentUrl) {
+
+
+    var xmlDocument = chargerHttpXML(xmlDocumentUrl);
+    
+    var serializer = new XMLSerializer();
+    var str = serializer.serializeToString(xmlDocument);
+    
+    // Recherche du parent (dont l'id est "here") de l'�l�ment � remplacer dans le document HTML courant
+    var elementHtmlParent = window.document.getElementById("id_display_map");
+    
+	// ins�rer l'�lement transform� dans la page html
+    elementHtmlParent.innerHTML = str;
+
+}
+
+function DisplayCountryName(){
+    document.getElementById('id_display_country').innerHTML=this.getAttribute("countryname");
+}
+
+function But7_MakeCountriesClickable(){
+    var countries = document.getElementById('id_display_map').getElementsByTagName("path");
+    for (let i = 1; i < countries.length; i++) {
+        countries[i].addEventListener("click", DisplayCountryName);
+      } 
+}
+
+
+function Country_touched(){
+    this.style.fill = 'red';
+    var code = this.getAttribute("id");
+}
+
+function Country_untouched(){
+    this.style.fill = 'grey';
+}
+
+
+function But8_MakeCountriesDynamic(){
+    var countries = document.getElementById('id_display_map').getElementsByTagName("path");
+    for (let i = 1; i < countries.length; i++) {
+        let previous_color = countries[i].style.fill;
+        countries[i].addEventListener("mouseover", Country_touched);
+        countries[i].addEventListener("mouseleave", function (){this.style.fill = previous_color;});  
+      } 
+}
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function Bouton3_ajaxBibliographie(xmlDocumentUrl, xslDocumentUrl, baliseElementARecuperer) {
 

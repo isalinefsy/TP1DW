@@ -13,13 +13,26 @@
       <input name="button2" id="idButton2" onclick="changeColor('white','white');" value="2. AJAX with Employees.xml" type="button"> <br>
       <br>
     <p>Displays the official name and the capital of the country of code : <br>
-      <input name = "input_country" id = "id_code_country" value = "Select a country code" type="text"> <input name="button3" id="idButton3"  onclick="DisplaySelectedCountry('countriesTP.xml','cherchepays.xsl','Pays',document.getElementById('id_code_country').value);" value="Select" type="button">
+      <input name = "input_country" id = "id_code_country" value = "Select a country code" type="text"> <input name="button3" id="idButton3"  onclick="DisplaySelectedCountry('countriesTP.xml','cherchepays.xsl','Pays',document.getElementById('id_code_country').value);" value="Select" type="button" >
 
-<p id="id_display_country"></p>
+    
+<p id="id_display_selected_country"></p>
 <br>
-<input name="button4" id="idButton4" onclick="LoadDrawing('exemple.svg');" value="Load Drawing" type="button">
-
+<input name="button4" id="idButton4" onclick="But4_LoadDrawing('exemple.svg');" value="Load Drawing" type="button">
+<input name="button5" id="idButton5" onclick="But5_MakeClickable();" value="Make Clickable" type="button">
 <p id="id_display_drawing"></p>
+<p id="id_display_title"></p>
+
+<input name="button6" id="idButton6" onclick="But6_LoadMap('worldHigh.svg');" value="Load Map" type="button">
+<input name="button7" id="idButton7" onclick="But7_MakeCountriesClickable();" value="Make Map Clickable" type="button">
+<input name="button8" id="idButton8" onclick="But8_MakeCountriesDynamic();" value="Make Map Dynamic" type="button">
+<p id="id_display_map"></p>
+<p id="id_display_country"></p>
+
+
+
+
+
 <br>
 </body>
 </html>
