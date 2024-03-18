@@ -243,6 +243,79 @@ function But10_AddCurrency(){
 
 
 
+// Fonction correspondant à l'appui sur le bouton 12, jeu
+function But12_clickSvg() {
+
+    var paths = document.getElementById('id_display_map').getElementsByTagName("path");
+    var name = paths[Math.floor(Math.random() * paths.length)].getAttribute("countryname");
+    document.getElementById("textjeu").innerHTML = "Try to find <span style='color: blue; font-weight: bold;'>" + name + "</span> on the map!";
+    
+    for (var i = 0; i < paths.length; i++) {
+        paths[i].addEventListener("click", function() {
+            var clickedName = this.getAttribute("countryname");
+            if (name && clickedName === name) {
+                alert("True");
+                document.getElementById("textjeu").innerHTML = "";
+                name = ""; // Reset name after correct guess
+            } else if (name && clickedName !== name) {
+                alert("False");
+            }
+            clickedName = "";
+        });
+    }
+}
+
+
+// Fonction correspondant à l'appui sur le bouton 13, colorie les pays en fonction de leur PIB/hab, relie a un json 
+function But13() {
+    fetch('POPULATION.json')
+        .then(response => response.json())
+        .then(data => {
+            var populationData = data;
+            var countries = document.getElementById('id_display_map').getElementsByTagName("path");
+            var legend = document.getElementById('legend');
+
+            for (var i = 0; i < populationData.length; i++) {
+                var countryName = populationData[i]['country'];
+                var population = parseInt(populationData[i]['population'], 10);
+
+                for (var j = 0; j < countries.length; j++) {
+                    if (countryName === countries[j].getAttribute('countryname')) {
+                        if (population < 1000000) {
+                            countries[j].style.fill = 'red';
+                        } else if (population < 10000000) {
+                            countries[j].style.fill = 'orange';
+                        } else if (population < 100000000) {
+                            countries[j].style.fill = 'yellow';
+                        } else {
+                            countries[j].style.fill = 'green';
+                        }
+                    }
+                }
+            }
+
+            // Create legend HTML elements
+            var legendItems = [
+                { color: 'red', label: 'Low Population (<1M)' },
+                { color: 'orange', label: 'Medium-Low Population (1M - 10M)' },
+                { color: 'yellow', label: 'Medium-High Population (10M - 100M)' },
+                { color: 'green', label: 'High Population (>100M)' }
+            ];
+
+            var legendHTML = '<ul>';
+            legendItems.forEach(item => {
+                legendHTML += `<li style="color: ${item.color};">${item.label}</li>`;
+            });
+            legendHTML += '</ul>';
+
+            // Append legend HTML to the legend element
+            legend.innerHTML = legendHTML;
+        })
+        .catch(error => {
+            console.error('Error fetching population data:', error);
+        });
+}
+
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
