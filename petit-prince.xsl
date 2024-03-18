@@ -7,16 +7,16 @@
 <html>
  <head>
          <title>
-                 Petit Prince fragment
+                 <xsl:value-of select="//title/text()"/> de <xsl:value-of select="//author/text()"/>
          </title>
  </head>
  
  <body style="background-color:white;">
-    <table align="center" cellspacing="50">
+    <table height="50"  align="center" cellspacing="50">
         <tr>
-           <td><img src="/Users/isalinefoissey/Documents/ECOLE/3IFBIS/DW/LabStatementTPDW2024/images/prince.png"></img></td>
+           <td><img src="../images/prince.png" title = "prince"></img></td>
            <td>
-              <h1 style="text-align:center; color:blue;">LePetitPrince</h1>
+              <h1 style="text-align:center; color:blue;"><xsl:value-of select="//title/text()"/></h1>
               <xsl:apply-templates select = "//author"/>
               <xsl:apply-templates select = "//styling_information"/>
            </td>
@@ -25,7 +25,7 @@
      <hr/>
     <h3 style="text-align:left; color:black;">Début du texte :</h3>
     <xsl:apply-templates select = "//paragraph"/>
-    <h4 style="text-align:left; color:black;">Fin du texte.</h4>
+    <h3 style="text-align:left; color:black;">Fin du texte.</h3>
     <hr/>   
 </body>
 </html>
@@ -39,9 +39,9 @@
  <xsl:template match="styling_information">
 
 <blockquote style ="color: darkgreen">
-    Purpose of the TP on <xsl:value-of select="date/text()"/> : <xsl:value-of select="styling_description/text()"/>
+    But du TP du <xsl:value-of select="date/text()"/> : <xsl:value-of select="styling_description/text()"/>
     <br/>
-    Authors : <xsl:value-of select="styled_by/style_manager[1]/text()"/> and <xsl:value-of select="styled_by/style_manager[2]/text()"/> and <xsl:value-of select="styled_by/style_manager[3]/text()"/> (<xsl:value-of select="styled_by/NoBinome/text()"/>)
+    Auteurs : <xsl:value-of select="styled_by/style_manager[1]/text()"/> et <xsl:value-of select="styled_by/style_manager[2]/text()"/> et <xsl:value-of select="styled_by/style_manager[3]/text()"/> (<xsl:value-of select="styled_by/NoBinome/text()"/>)
     <br/>
     Email : <xsl:value-of select="email[1]/text()"/>
     </blockquote>
@@ -49,37 +49,18 @@
 
 <xsl:template match="image">
     <div align="center">
-        <img>
-            <xsl:attribute name="src">
+        <img src = "../images/mouton.png" title = "sheep">
+            <!--<xsl:attribute name="src">
                 <xsl:value-of select="@path"/>
-            </xsl:attribute>
+            </xsl:attribute>-->
         </img>
     </div>
 </xsl:template> 
 
-<!--<xsl:template match="paragraph">
-    <p>
-    <xsl:for-each select="phrase">
-        <xsl:if test="./@language = 'francais'">
-            <xsl:if test="./preceding-sibling::phrase[1]/@language = 'hongrois'">
-                <br/>
-            </xsl:if>
-            <xsl:value-of select="text()"/>
-        </xsl:if>
-        <xsl:if test="./@language = 'hongrois'">
-            <xsl:if test="./preceding-sibling::phrase[1]/@language = 'francais'">
-                <br/>
-            </xsl:if>
-            <span style ="color : brown; font-style: italic;">
-            <xsl:value-of select="text()"/>
-            </span>
-        </xsl:if>
-    </xsl:for-each>
-    </p>
-</xsl:template>
--->
-
 <xsl:template match="paragraph">
+    <xsl:if test= "position()=count(//body/image/preceding-sibling::paragraph)+2">
+    <xsl:apply-templates select = "//image"/>
+    </xsl:if>
     <p>
         <!-- si on a de la narration -->
         <xsl:if test="@type='narration'">
@@ -101,7 +82,7 @@
                         </xsl:choose>
                     <!-- Check if the text contains the word "mouton" -->
                      <xsl:if test="contains(text(), 'mouton')">
-                        <img src="/Users/isalinefoissey/Documents/ECOLE/3IFBIS/DW/LabStatementTPDW2024/images/moutonDessin.png" title="Ship" />
+                        <img src="../images/moutonDessin.png" title="Sheep" />
                     </xsl:if>
                 </xsl:if>
 
@@ -127,14 +108,7 @@
                                 <xsl:for-each select="phrase[@language = 'francais']">
                                     <tr>
                                         <td width="50">
-                                            <!-- si le petit prince parle -->
-                                            <xsl:if test="@speaker = 'LePetitPrince'">
-                                                <img src="/Users/isalinefoissey/Documents/ECOLE/3IFBIS/DW/LabStatementTPDW2024/images/LePetitPrince.png" title="{@speaker}" />
-                                            </xsl:if>
-                                            <!-- si le narrateur parle -->
-                                            <xsl:if test="@speaker = 'Narrateur'">
-                                                <img src="/Users/isalinefoissey/Documents/ECOLE/3IFBIS/DW/LabStatementTPDW2024/images/Narrateur.png" title="{@speaker}" />
-                                            </xsl:if>
+                                            <img src="../images/{@speaker}.png" title="{@speaker}" />
                                         </td>
                                         <td>
                                             <!-- Make the sentence containing "mouton" bold -->
@@ -150,7 +124,7 @@
                                             </xsl:choose>
                                             <!-- Check if the text contains the word "mouton" -->
                                              <xsl:if test="contains(text(), 'mouton')">
-                                                <img src="/Users/isalinefoissey/Documents/ECOLE/3IFBIS/DW/LabStatementTPDW2024/images/moutonDessin.png" title="Ship" />
+                                                <img src="../images/moutonDessin.png" title="Sheep" />
                                             </xsl:if>
                                         </td>
                                     </tr>
@@ -169,13 +143,7 @@
                                 <xsl:for-each select="phrase[@language = 'hongrois']">
                                     <tr>
                                         <td width="50">
-                                            <!-- si le petit prince parle -->
-                                            <xsl:if test="@speaker = 'LePetitPrince'">
-                                                <img src="/Users/isalinefoissey/Documents/ECOLE/3IFBIS/DW/LabStatementTPDW2024/images/LePetitPrince.png" title="{@speaker}" />
-                                            </xsl:if>
-                                            <xsl:if test="@speaker = 'Narrateur'">
-                                                <img src="/Users/isalinefoissey/Documents/ECOLE/3IFBIS/DW/LabStatementTPDW2024/images/Narrateur.png" title="{@speaker}" />
-                                            </xsl:if>
+                                            <img src="../images/{@speaker}.png" title="{@speaker}" />
                                         </td>
                                         <td>
                                             <span style="color: brown; font-style: italic;">
