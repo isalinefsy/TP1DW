@@ -7,18 +7,18 @@
 	<xsl:template match="/">
 		<HTML>
 			<BODY bgcolor="#FFFFCC">
-				<H1>Selected country</H1>
-				<element_a_recuperer>
+				<H1>Country</H1>
+				<Pays>
 					<ul><!-- on cherche les références bibliographiques dont la balise contient la valeur du paramètre-->
-						<xsl:apply-templates select="//country_codes/*[contains(local-name(),$code)]/../.."/>
+						<xsl:apply-templates select="//country_codes/cca2[contains(.,$code)]/../.."/>
 					</ul>
-				</element_a_recuperer>
+				</Pays>
 			</BODY>
 		</HTML>
 	</xsl:template>
 	<xsl:template match="country">
 		<LI>
-			<xsl:value-of select="offic_name"/>:
+			<xsl:value-of select="country_name/offic_name"/>:
     	    <xsl:value-of select="capital"/>.     
   		</LI>
 	</xsl:template>
