@@ -1,0 +1,100 @@
+1)
+$x("//author")
+
+
+Array [ author
+ ]
+​
+0: <author>
+​
+length: 1
+​
+<prototype>: Array []
+
+
+2)
+$x("//paragraph[@type='dialogue']")
+
+Array(11) [ paragraph, paragraph, paragraph, paragraph, paragraph, paragraph, paragraph, paragraph, paragraph, paragraph
+, … ]
+​
+0: <paragraph type="dialogue">​
+1: <paragraph type="dialogue">​
+2: <paragraph type="dialogue">
+
+3)
+$x("//phrase[@language='francais']") 
+
+
+Array(65) [ phrase, phrase, phrase, phrase, phrase, phrase, phrase, phrase, phrase, phrase
+, … ]
+​
+0: <phrase speaker="Narrateur" modality="declarative" language="francais">​
+1: <phrase speaker="Narrateur" modality="declarative" language="francais">​
+2: <phrase speaker="Narrateur" modality="declarative" language="francais">
+
+4)
+$x("//paragraph/phrase[position()=2]")
+
+Array(25) [ phrase, phrase, phrase, phrase, phrase, phrase, phrase, phrase, phrase, phrase
+, … ]
+​
+0: <phrase speaker="Narrateur" modality="declarative" language="francais">​
+1: <phrase speaker="Narrateur" modality="declarative" language="francais">​
+2: <phrase speaker="LePetitPrince" modality="declarative" language="hongrois">
+
+
+5)
+$x("//paragraph/phrase")[10]
+
+<phrase speaker="Narrateur" modality="declarative" language="francais">
+
+
+6)
+$x("count(//paragraph)")
+
+25 
+
+7)
+$x("//*[count(attribute::*)>=1]")
+
+Array(154) [ cover, link, link, paragraph, phrase, phrase, phrase, phrase, phrase, phrase
+, … ]
+​
+[0…99]
+​​
+0: <cover path="images/prince.png">​​
+1: <link language="francais">​​
+2: <link language="hongrois">
+
+
+8)
+$x("//phrase[contains(.,'mouton')]")
+
+Array(12) [ phrase, phrase, phrase, phrase, phrase, phrase, phrase, phrase, phrase, phrase
+, … ]
+​
+0: <phrase speaker="LePetitPrince" modality="declarative" language="francais">​
+1: <phrase speaker="LePetitPrince" modality="declarative" language="francais">
+
+
+9) on selection
+$x("//paragraph/phrase/@modality[not(. = preceding::phrase/@modality)]")
+
+Array(4) [ modality="declarative", modality="exclamative", modality="interrogative", modality="impérative" ]
+​
+0: modality="declarative"
+​
+1: modality="exclamative"
+​
+2: modality="interrogative"
+​
+3: modality="impérative"
+
+
+10) on compte le nombre de paragraph précédent pour avoir la position de l'image et encore +1 pour avoir la position du paragraphe suivant
+
+$x("count(//body/image/preceding-sibling::paragraph)")+1
+
+22 
+
