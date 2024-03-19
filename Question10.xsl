@@ -40,9 +40,7 @@
                     </xsl:if>
                 </xsl:for-each>
             </TD>
-            <TD>
-                <xsl:value-of select="https://restcountries.com/v2/alpha/{code}"/>
-                <p>test</p>
+            <TD id="currency_column">
             </TD>
         </TR>
     </xsl:template>

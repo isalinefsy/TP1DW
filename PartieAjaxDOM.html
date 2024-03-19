@@ -1,22 +1,27 @@
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
-    <title>TP 3IF Ajax</title>
+    <title>TP 3IF Ajax - B3226</title>
     <meta name="author" content="El�d EGYED-ZSIGMOND">
     <script type="text/javascript" src="partieJavascript.js"></script>
   </head>
   <body>
+    <h2 style="text-align:center;">TP Partie Ajax trinome B3226</h2>
+    <h3 style = "text-align: center;">Styled by Isaline Foissey, Romane Gouineaud and Florian Le Vasseur</h3>
+    <hr> <br>
     <p> Change the background to blue and the text of the button to white<br>
-      <input name="button" id="idButton1" onclick="But1_changeColor('blue','white');" value="Button 1 : Change Background Color" type="button">
-      <br>
+      <input name="button" id="idButton1" onclick="But1_2_changeColor('lightblue','white');" value="Button 1 : Change Background Color" type="button">
+      <br><br>
       Reset the background color : <br>
-      <input name="button2" id="idButton2" onclick="But1_changeColor('white','white');" value="Button 2 : Reset BackGround Color" type="button"> <br>
+      <input name="button2" id="idButton2" onclick="But1_2_changeColor('white','white');" value="Button 2 : Reset BackGround Color" type="button"> <br>
       <br>
       <p>Displays the official name and the capital of the country of code : <br>
         <input name="text" type="text" id="id_code_country" type="Type a country code" list="id_datalist"/>
             <datalist id = "id_datalist">
             </datalist>
         <input name="button3" id="idButton3"  onclick="But3_DisplaySelectedCountry('countriesTP.xml','cherchepays.xsl','Pays',document.getElementById('id_code_country').value);" value="Button 3 : Select" type="button" >
+        <input name="button9" id="idButton9" onclick="But9_ActivateAutoCompletion('countriesTP.xml');" value="Button 9 : Activate Completion" type="button">
+        <input name="button9bis" id="idButton9bis" onclick="But9_DeactivateAutoCompletion('countriesTP.xml');" value="Button 9bis : Deactivate Completion" type="button">
       </p>
     
 <p id="id_display_selected_country"></p>
@@ -30,26 +35,24 @@
 
 <br>
 
+<p>
 <input name="button6" id="idButton6" onclick="But6_LoadMap('worldHigh.svg');" value="Button 6 : Load Map" type="button">
 <input name="button7" id="idButton7" onclick="But7_MakeCountriesClickable();" value="Button 7 : Make Map Clickable" type="button">
 <input name="button8" id="idButton8" onclick="But8_MakeCountriesDynamic();" value="Button 8 : Make Map Dynamic" type="button">
-<p id="id_display_country"></p>
-<p id="id_display_map"></p>
-<p id="textjeu"></p>
-<p id="legend"></p>
-
-
-<br>
-<input name="button9" id="idButton9" onclick="But9_ActivateAutoCompletion('countriesTP.xml');" value="Button 9 : Activate Completion" type="button">
-<input name="button9bis" id="idButton9bis" onclick="But9_DeactivateAutoCompletion('countriesTP.xml');" value="Button 9bis : Deactivate Completion" type="button">
-<br>
-
 <input name="button10" id="idButton10" onclick="But10_AddCurrency()" value="Button 10 : Add Currency" type="button">
-
-<br>
-
 <input name="button12" id="myButton12" onClick="But12_clickSvg();" value="Button 12. Game : click the country on the map" type="button">
 <input name="button13" id="myButton13" onClick="But13();" value="Button 13. Bonus : Click on this button to display population" type="button">
+
+</p>
+<p id="textjeu"></p>
+
+<p id="id_display_country"></p>
+<p id="id_display_map"></p>
+<span id="legend"></span>
+
+
+<br>
+
 
 <br>
 </body>
